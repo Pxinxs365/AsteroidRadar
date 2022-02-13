@@ -5,11 +5,11 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("statusIcon")
-fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
+fun ImageView.bindAsteroidStatusImage(isHazardous: Boolean) {
     if (isHazardous) {
-        imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
+        this.setImageResource(R.drawable.ic_status_potentially_hazardous)
     } else {
-        imageView.setImageResource(R.drawable.ic_status_normal)
+        this.setImageResource(R.drawable.ic_status_normal)
     }
 }
 
@@ -38,4 +38,14 @@ fun bindTextViewToKmUnit(textView: TextView, number: Double) {
 fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     val context = textView.context
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
+}
+
+@BindingAdapter("hazardousDescriptionText")
+fun bindImageViewToDisplayIfAsteroidHazardous(imageView: ImageView, isHazardous: Boolean) {
+    val context = imageView.context
+    if (isHazardous) {
+        imageView.contentDescription = context.getString(R.string.potentially_hazardous_asteroid_image)
+    } else {
+        imageView.contentDescription = context.getString(R.string.not_hazardous_asteroid_image)
+    }
 }
